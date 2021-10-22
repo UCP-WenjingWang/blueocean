@@ -15,7 +15,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
             echo 'build successfully'
           }
@@ -32,12 +32,20 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
             echo 'test successfully'
           }
         }
 
+      }
+    }
+
+    stage('Delivery') {
+      steps {
+        sh './jenkins/scripts/deliver.sh'
+        input 'Finished using the web site? (Click "Proceed" to continue)'
+        sh './jenkins/scripts/kill.sh'
       }
     }
 
